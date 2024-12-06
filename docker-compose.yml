@@ -1,0 +1,8 @@
+
+services:
+        ai-service:
+                image: ai-service
+                container_name: ai-service
+                network_mode: host
+                restart: unless-stopped
+
