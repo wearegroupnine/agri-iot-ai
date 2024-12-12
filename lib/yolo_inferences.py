@@ -10,6 +10,8 @@ def inference_obj_yolo(img):
     bboxes = result[0].boxes
     result_img = img.copy()
     draw_bboxes(result_img, bboxes)
-    return {"img":result_img.tolist()}
-    #return {"bboxes":bboxes.tolist(), "classes":classes.tolist()}
+    #return {"img":result_img.tolist()}
+    return {"ai":result_img.tolist(),\
+            "bboxes":bboxes.xyxy.detach().numpy().tolist(), 
+            "classes":bboxes.cls.detach().numpy().tolist()}
 
