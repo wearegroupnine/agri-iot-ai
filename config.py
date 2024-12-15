@@ -8,6 +8,7 @@ config.read(config_file)
 version = ''
 
 path_obj_yolo = ''
+path_disease_yolo = ''
 
 param_yolo_conf_thresh = None 
 param_yolo_nms_thresh = None 
@@ -25,7 +26,7 @@ def check_config_section():
     config.write(open(config_file, 'w'))
 
 def get_config():
-    global version, path_obj_yolo, param_yolo_conf_thresh, param_yolo_nms_thresh
+    global version, path_obj_yolo, path_disease_yolo, param_yolo_conf_thresh, param_yolo_nms_thresh
     try:
         version = config.get('common', 'version')
     except Exception as e:
@@ -37,6 +38,11 @@ def get_config():
     except Exception as e:
         logger.warning(e)
         path_obj_yolo = ''
+    try:
+        path_disease_yolo = config.get('path', 'disease_yolo')
+    except Exception as e:
+        logger.warning(e)
+        path_disease_yolo = ''
 
     try:
         param_yolo_conf_thresh = config.get('param', 'yolo_conf_thresh')
