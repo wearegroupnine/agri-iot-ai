@@ -1,11 +1,13 @@
-FROM balenalib/jetson-nano-debian-python:latest
+FROM ultralytics/yolov5:latest
 
 WORKDIR ./
 
 COPY requirements.txt ./
-
-RUN pip install --no-cache-dir -r requirements.txt
-RUN pip install opencv-python-headless
+RUN apt-get update
+RUN apt-get install -y python3.8 python3-pip
+RUN apt-get clean
+RUN pip3 install flask
+RUN pip3 install opencv-python-headless
 
 ADD . ./agri
 

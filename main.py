@@ -4,8 +4,12 @@ import numpy as np
 from lib.yolo_inferences import inference_with_yolo
 app = Flask(__name__)
 
-@app.route('/obj_prediction', methods=['POST'])
-def obj_prediction():
+@app.route('/', methods=['GET'])
+def test():
+    return "hello"
+
+@app.route('/prediction', methods=['POST'])
+def prediction():
     data = request.json
     raw_image = np.array(data["img"]).astype(np.uint8)
     response = inference_with_yolo(config.path_obj_yolo, raw_image, whichyolo="obj")
@@ -15,4 +19,4 @@ def obj_prediction():
 
 if __name__ == "__main__":
     config.reload_config()
-    app.run(debug=True, port=6600)
+    app.run(host="0.0.0.0", debug=True, port=6600)
